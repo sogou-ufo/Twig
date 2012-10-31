@@ -1,5 +1,6 @@
 * 1.11.0 (2012-XX-XX)
 
+ * fixed getting a numeric-like item on a variable ('09' for instance)
  * fixed bitwise operator precedences
  * added the template_from_string function
  * fixed default timezone usage for the date function
