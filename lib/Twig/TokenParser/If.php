@@ -50,7 +50,7 @@ class Twig_TokenParser_If extends Twig_TokenParser
                     $else = $this->parser->subparse(array($this, 'decideIfEnd'));
                     break;
 
-                case 'elseif':
+                case 'elif':
                     $expr = $this->parser->getExpressionParser()->parseExpression();
                     $stream->expect(Twig_Token::BLOCK_END_TYPE);
                     $body = $this->parser->subparse(array($this, 'decideIfFork'));
@@ -63,7 +63,7 @@ class Twig_TokenParser_If extends Twig_TokenParser
                     break;
 
                 default:
-                    throw new Twig_Error_Syntax(sprintf('Unexpected end of template. Twig was looking for the following tags "else", "elseif", or "endif" to close the "if" block started at line %d)', $lineno), $stream->getCurrent()->getLine(), $stream->getFilename());
+                    throw new Twig_Error_Syntax(sprintf('Unexpected end of template. Twig was looking for the following tags "else", "elif", or "endif" to close the "if" block started at line %d)', $lineno), $stream->getCurrent()->getLine(), $stream->getFilename());
             }
         }
 
@@ -74,7 +74,7 @@ class Twig_TokenParser_If extends Twig_TokenParser
 
     public function decideIfFork(Twig_Token $token)
     {
-        return $token->test(array('elseif', 'else', 'endif'));
+        return $token->test(array('elif', 'else', 'endif'));
     }
 
     public function decideIfEnd(Twig_Token $token)

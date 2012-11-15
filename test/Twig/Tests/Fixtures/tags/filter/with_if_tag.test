@@ -14,7 +14,7 @@ FOO
 
 {% if items.3 is defined %}
 FOO
-{% elseif items.1 %}
+{% elif items.1 %}
 {{ items.0 }}
 {% endif %}
 

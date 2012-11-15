@@ -317,7 +317,6 @@ class Twig_Environment
     public function loadTemplate($name, $index = null)
     {
         $cls = $this->getTemplateClass($name, $index);
-
         if (isset($this->loadedTemplates[$cls])) {
             return $this->loadedTemplates[$cls];
         }

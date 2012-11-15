@@ -3,7 +3,7 @@
 --TEMPLATE--
 {% if a < 2 %}
   A1
-{% elseif a > 10 %}
+{% elif a > 10 %}
   A2
 {% else %}
   A3

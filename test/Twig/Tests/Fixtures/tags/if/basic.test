@@ -3,7 +3,7 @@
 --TEMPLATE--
 {% if a is defined %}
   {{ a }}
-{% elseif b is defined %}
+{% elif b is defined %}
   {{ b }}
 {% else %}
   NOTHING
