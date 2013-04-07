@@ -134,7 +134,7 @@ class Twig_Extension_Core extends Twig_Extension
             'abs'           => new Twig_Filter_Function('abs'),
 
             // encoding
-            'url_encode'       => new Twig_Filter_Function('twig_urlencode_filter'),
+            'urlencode'       => new Twig_Filter_Function('twig_urlencode_filter'),
             'json_encode'      => new Twig_Filter_Function('twig_jsonencode_filter'),
             'convert_encoding' => new Twig_Filter_Function('twig_convert_encoding'),
 
@@ -157,6 +157,7 @@ class Twig_Extension_Core extends Twig_Extension
             'reverse' => new Twig_Filter_Function('twig_reverse_filter', array('needs_environment' => true)),
             'length'  => new Twig_Filter_Function('twig_length_filter', array('needs_environment' => true)),
             'slice'   => new Twig_Filter_Function('twig_slice', array('needs_environment' => true)),
+            'truncate'   => new Twig_Filter_Function('twig_truncated', array('needs_environment' => true)),
 
             // iteration and runtime
             'default' => new Twig_Filter_Node('Twig_Node_Expression_Filter_Default'),
@@ -618,7 +619,17 @@ function twig_slice(Twig_Environment $env, $item, $start, $length = null, $prese
 
     return null === $length ? substr($item, $start) : substr($item, $start, $length);
 }
-
+function utf8Substr($str, $from, $len)
+{
+    return preg_replace('#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$from.'}'.
+                       '((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
+                       '$1',$str);
+} 
+//truncate(s, length=255, killwords=False, end='...')
+function twig_truncated(Twig_Environment $env, $item, $length, $killwords=false, $end='...') {
+    if($killwords) return (null === $length ? substr($item, 0) : utf8Substr($item, 0, $length) ) . (strlen($item) <= $length ? '' : $end);
+    return $end;
+}
 /**
  * Joins the values to a string.
  *

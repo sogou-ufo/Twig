@@ -1,4 +1,19 @@
 <?php
+// fix php version bug
+if(!function_exists('spl_object_hash')) {
+    function spl_object_hash($object){
+        if (is_object($object)){
+            ob_start();
+            var_dump($object);
+            $dump = ob_get_contents();
+            ob_end_clean();
+            if (preg_match('/^object\(([a-z0-9_]+)\)\#(\d)+/i', $dump, $match)) {
+                return md5($match[1] . $match[2]);
+            }
+        }
+        return null;
+    }
+}
 
 /*
  * This file is part of Twig.
