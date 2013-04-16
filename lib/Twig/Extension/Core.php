@@ -157,6 +157,8 @@ class Twig_Extension_Core extends Twig_Extension
             'reverse' => new Twig_Filter_Function('twig_reverse_filter', array('needs_environment' => true)),
             'length'  => new Twig_Filter_Function('twig_length_filter', array('needs_environment' => true)),
             'slice'   => new Twig_Filter_Function('twig_slice', array('needs_environment' => true)),
+            // only for string
+            'substring'   => new Twig_Filter_Function('twig_slice', array('needs_environment' => true)),
             'truncate'   => new Twig_Filter_Function('twig_truncated', array('needs_environment' => true)),
 
             // iteration and runtime

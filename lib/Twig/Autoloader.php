@@ -13,7 +13,20 @@ if(!function_exists('spl_object_hash')) {
         }
         return null;
     }
-}
+};
+// 重写range函数，让其表现和jinja一致,jinja不包含右边界
+function __range($left, $right, $step=1) {
+    if(isset($left) && isset($right)) {
+        if($left < $right){
+            $right = $right - $step; 
+        } else {
+            $left = $left + $step;    
+        }
+        return range($left, $right, $step);
+    } else {
+        return array();    
+    } 
+};
 
 /*
  * This file is part of Twig.
