@@ -87,6 +87,8 @@ class Twig_Node_For extends Twig_Node
             ->subcompile($this->getNode('value_target'))
             ->raw(") {\n")
             ->indent()
+            ->write("\$context['loop']['key'] = \$context[\"_key\"];\n")
+            ->write("\$context['loop']['value'] = \$context['_seq'][\$context['_key']];\n")
             ->subcompile($this->getNode('body'))
             ->outdent()
             ->write("}\n")
