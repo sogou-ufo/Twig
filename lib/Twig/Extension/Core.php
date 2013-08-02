@@ -160,6 +160,7 @@ class Twig_Extension_Core extends Twig_Extension
             // only for string
             'substring'   => new Twig_Filter_Function('twig_slice', array('needs_environment' => true)),
             'truncate'   => new Twig_Filter_Function('twig_truncated', array('needs_environment' => true)),
+            'cutUtf8'   => new Twig_Filter_Function('twig_cutUtf8', array('needs_environment' => true)),
 
             // iteration and runtime
             'default' => new Twig_Filter_Node('Twig_Node_Expression_Filter_Default'),
@@ -627,6 +628,19 @@ function utf8Substr($str, $from, $len)
                        '((?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){0,'.$len.'}).*#s',
                        '$1',$str);
 } 
+function twig_cutUtf8(Twig_Environment $env, $str, $length) {
+	$len = mb_strlen($str,'utf8');  
+	$count = 0;
+	$res = '';
+	for($i = 0; $i < $len; $i++){
+		$curr_char   = mb_substr($str,$i,1,'utf8');   
+        $curr_length = ord($curr_char) > 127 ? 2 : 1; 
+		if($count + $curr_length > $length) break;
+		$count += $curr_length;
+		$res .= $curr_char;
+	}    
+	return $res;    
+}
 //truncate(s, length=255, killwords=False, end='...')
 function twig_truncated(Twig_Environment $env, $item, $length, $killwords=false, $end='...') {
     if($killwords) return (null === $length ? substr($item, 0) : utf8Substr($item, 0, $length) ) . (strlen($item) <= $length ? '' : $end);
