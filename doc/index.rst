@@ -15,3 +15,5 @@ Twig
     filters/index
     functions/index
     tests/index
+    installation
+    deprecated

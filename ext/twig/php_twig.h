@@ -1,4 +1,4 @@
-/*
+B/*
    +----------------------------------------------------------------------+
    | Twig Extension                                                       |
    +----------------------------------------------------------------------+
@@ -6,7 +6,7 @@
    +----------------------------------------------------------------------+
    | Redistribution and use in source and binary forms, with or without   |
    | modification, are permitted provided that the conditions mentioned   |
-   | in the accompanying LICENSE file are met (BSD, revised).             |
+   | in the accompanying LICENSE file are met (BSD-3-Clause).             |
    +----------------------------------------------------------------------+
    | Author: Derick Rethans <derick@derickrethans.nl>                     |
    +----------------------------------------------------------------------+
@@ -15,7 +15,9 @@
 #ifndef PHP_TWIG_H
 #define PHP_TWIG_H
 
-#define PHP_TWIG_VERSION "1.11.1-DEV"
+
+#define PHP_TWIG_VERSION "1.14.1"
+
 
 #include "php.h"
 
