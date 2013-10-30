@@ -1,4 +1,4 @@
-B<?php
+<?php
 
 /*
  * This file is part of Twig.
